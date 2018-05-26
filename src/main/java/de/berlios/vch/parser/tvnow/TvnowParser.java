@@ -1,7 +1,5 @@
 package de.berlios.vch.parser.tvnow;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -163,7 +161,7 @@ public class TvnowParser implements IWebParser {
         String pageUri = opage.getUri().toString();
         String seoUrl = pageUri.substring(pageUri.lastIndexOf('/')+1);
         String station = opage.getUri().getScheme();
-        String uri = "https://api.tvnow.de/v3/formats/seo?fields=*,.*,formatTabs.*,formatTabs.formatTabPages.*,formatTabs.formatTabPages.container.*,formatTabs.formatTabPages.container.movies.*&name="+seoUrl+".php&station="+station;
+        String uri = API_URL + "/formats/seo?fields=*,.*,formatTabs.*,formatTabs.formatTabPages.*,formatTabs.formatTabPages.container.*,formatTabs.formatTabPages.container.movies.*&name="+seoUrl+".php&station="+station;
         String response = HttpUtils.get(uri, null, CHARSET);
         JSONObject json = new JSONObject(response);
         JSONObject formatTabs = json.getJSONObject("formatTabs");
@@ -205,22 +203,6 @@ public class TvnowParser implements IWebParser {
                 }
             } else {
                 System.out.println("Season without title");
-            }
-        }
-
-        File debugout = new File("/tmp/prog.json");
-        FileOutputStream fout = null;
-        try {
-            fout = new FileOutputStream(debugout);
-            fout.write(json.toString(2).getBytes("utf-8"));
-        } catch(Exception e) {
-            e.printStackTrace(System.err);
-        } finally {
-            if(fout != null) {
-                try {
-                    fout.close();
-                } catch (Exception e) {
-                }
             }
         }
     }
