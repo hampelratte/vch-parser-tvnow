@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>parser.tvnow</artifactId>
     <packaging>bundle</packaging>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>VCH Tvnow Parser</name>
     <description>Parser for TVnow, the VOD platform of the RTL group</description>
 
